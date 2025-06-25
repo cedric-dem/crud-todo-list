@@ -26,15 +26,27 @@ import { Note } from './models/note.model';
     </div>
 
     <p>{{ response }}</p>
+
+
+    <h2>List of notes</h2>
+    <ul>
+      <li *ngFor="let n of notes">
+        <strong>{{ n.title }}</strong> — {{ n.content }}
+      </li>
+    </ul>
+
   `,
 })
 export class App implements OnInit {
+
 
   private noteService = inject(NoteService);
   private testService = inject(TestService);
 
   note: Note = { title: '', content: '' };
   createdNote: Note | null = null;
+
+  notes: Note[] = [];   // <-- stockage de la liste des notes
 
   response = '';
 
@@ -43,13 +55,23 @@ export class App implements OnInit {
       next: res => this.response = res,
       error: err => this.response = 'Error : ' + err.message
     });
+
+    this.loadNotes();
+  }
+
+  loadNotes() {
+    this.noteService.getNotes().subscribe({
+      next: notes => this.notes = notes,
+      error: err => console.error('Error loading notes', err)
+    });
   }
 
   submit() {
     this.noteService.createNote(this.note).subscribe({
       next: res => {
         this.createdNote = res;
-        this.note = { title: '', content: '' }; // reset
+        this.note = { title: '', content: '' };
+        this.loadNotes();
       },
       error: err => console.error('Error Creating note', err)
     });
