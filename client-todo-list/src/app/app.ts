@@ -19,14 +19,6 @@ import { Note } from './models/note.model';
       <br />
       <button type="submit">Create</button>
     </form>
-    <div *ngIf="createdNote">
-      <h3>Created Note</h3>
-      <p><strong>{{ createdNote.title }}</strong></p>
-      <p>{{ createdNote.content }}</p>
-    </div>
-
-    <p>{{ response }}</p>
-
 
     <h2>List of notes</h2>
     <ul>
@@ -46,7 +38,7 @@ export class App implements OnInit {
   note: Note = { title: '', content: '' };
   createdNote: Note | null = null;
 
-  notes: Note[] = [];   // <-- stockage de la liste des notes
+  notes: Note[] = [];
 
   response = '';
 

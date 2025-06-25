@@ -10,9 +10,7 @@ class NoteController {
 
     @PostMapping
     fun createNote(@RequestBody note: Note): Note {
-        println("Adding note: $note")
         notes.add(note)
-        println("Current notes: $notes")
         return note
     }
     
