@@ -17,7 +17,7 @@ export class App implements OnInit {
   ngOnInit() {
     this.testService.getTest().subscribe({
       next: res => this.response = res,
-      error: err => this.response = 'Erreur : ' + err.message
+      error: err => this.response = 'Error : ' + err.message
     });
   }
 }
