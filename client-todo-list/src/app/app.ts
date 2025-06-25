@@ -5,7 +5,7 @@ import { TestService } from './services/test';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [],
   styleUrl: './app.css',
   template: `<p>{{ response }}</p>`,
 })
