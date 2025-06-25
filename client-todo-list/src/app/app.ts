@@ -4,30 +4,14 @@ import { TestService } from './services/test';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Note } from './models/note.model';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterOutlet],
   styleUrls: ['./app.css'],
-  template: `
-    <h2>Crate a note</h2>
-    <form (ngSubmit)="submit()">
-      <input [(ngModel)]="note.title" name="title" placeholder="Title" required />
-      <br />
-      <textarea [(ngModel)]="note.content" name="content" placeholder="Content" required></textarea>
-      <br />
-      <button type="submit">Create</button>
-    </form>
-
-    <h2>List of notes</h2>
-    <ul>
-      <li *ngFor="let n of notes">
-        <strong>{{ n.title }}</strong> — {{ n.content }}
-      </li>
-    </ul>
-
-  `,
+  templateUrl: './app.html'
 })
 export class App implements OnInit {
 
