@@ -16,11 +16,14 @@ import { formatDistanceToNow, isPast } from 'date-fns';
 })
 export class App implements OnInit {
 
+  logDueDate() {
+    console.log('Current dueDate:', this.task.dueDate);
+  }
 
   private taskService = inject(TaskService);
   private testService = inject(TestService);
 
-  task: Task = { title: '', content: '', completed:false, importance:"", dateCreation: null, dueDate: null };
+  task: Task = { title: '', content: '', completed:false, importance:"", dateCreation: null, dueDate:"" };
   createdTask: Task | null = null;
 
   tasks: Task[] = [];
@@ -44,10 +47,13 @@ export class App implements OnInit {
   }
 
   submit() {
+  console.log(this.task.dueDate)
+
+
     this.taskService.createTask(this.task).subscribe({
       next: res => {
         this.createdTask = res;
-        this.task = { title: '', content: '' , completed: false, importance:"", dateCreation: null, dueDate:null  };
+        this.task = { title: '', content: '' , completed: false, importance:"", dateCreation: null, dueDate: ""  };
         this.loadTasks();
       },
       error: err => console.error('Error Creating task', err)

@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Entity
@@ -28,5 +29,5 @@ data class Task(
 
     val dateCreation: LocalDateTime = LocalDateTime.now(),
 
-    var dueDate: LocalDateTime? = null
+    var dueDate: LocalDate,
 )
