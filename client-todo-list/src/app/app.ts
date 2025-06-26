@@ -1,9 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { NoteService } from './services/note.service';
+import { TaskService } from './services/task.service';
 import { TestService } from './services/test';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Note } from './models/note.model';
+import { Task } from './models/task.model';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -16,13 +16,13 @@ import { RouterOutlet } from '@angular/router';
 export class App implements OnInit {
 
 
-  private noteService = inject(NoteService);
+  private taskService = inject(TaskService);
   private testService = inject(TestService);
 
-  note: Note = { title: '', content: '' };
-  createdNote: Note | null = null;
+  task: Task = { title: '', content: '' };
+  createdTask: Task | null = null;
 
-  notes: Note[] = [];
+  tasks: Task[] = [];
 
   response = '';
 
@@ -32,24 +32,24 @@ export class App implements OnInit {
       error: err => this.response = 'Error : ' + err.message
     });
 
-    this.loadNotes();
+    this.loadTasks();
   }
 
-  loadNotes() {
-    this.noteService.getNotes().subscribe({
-      next: notes => this.notes = notes,
-      error: err => console.error('Error loading notes', err)
+  loadTasks() {
+    this.taskService.getTasks().subscribe({
+      next: tasks => this.tasks = tasks,
+      error: err => console.error('Error loading tasks', err)
     });
   }
 
   submit() {
-    this.noteService.createNote(this.note).subscribe({
+    this.taskService.createTask(this.task).subscribe({
       next: res => {
-        this.createdNote = res;
-        this.note = { title: '', content: '' };
-        this.loadNotes();
+        this.createdTask = res;
+        this.task = { title: '', content: '' };
+        this.loadTasks();
       },
-      error: err => console.error('Error Creating note', err)
+      error: err => console.error('Error Creating task', err)
     });
   }
 }

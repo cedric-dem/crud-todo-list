@@ -1,20 +1,20 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Note } from '../models/note.model';
+import { Task } from '../models/task.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NoteService {
+export class TaskService {
   private http = inject(HttpClient);
   private baseUrl = 'http://localhost:8080/api/tasks';
 
-  getNotes(): Observable<Note[]> {
-    return this.http.get<Note[]>(this.baseUrl);
+  getTasks(): Observable<Task[]> {
+    return this.http.get<Task[]>(this.baseUrl);
   }
 
-  createNote(note: Note): Observable<Note> {
-    return this.http.post<Note>(this.baseUrl, note);
+  createTask(task: Task): Observable<Task> {
+    return this.http.post<Task>(this.baseUrl, task);
   }
 }
