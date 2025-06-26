@@ -8,7 +8,7 @@ import jakarta.persistence.Table
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
 @Entity
-@Table(name = "database_note")
+@Table(name = "database_task")
 data class Task(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
