@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Task } from './models/task.model';
 import { RouterOutlet } from '@angular/router';
+import { formatDistanceToNow } from 'date-fns';
 
 @Component({
   selector: 'app-root',
@@ -62,6 +63,10 @@ export class App implements OnInit {
       },
       error: err => console.error('Error setting task as completed', err)
     });
+  }
+
+  getRelativeDate(dateString: string): string {
+    return formatDistanceToNow(new Date(dateString), { addSuffix: true});
   }
 
   removeTaskFromCompleted(task: any) {
