@@ -1,0 +1,19 @@
+package com.example.servertodolist.controller
+import com.example.servertodolist.models.Task
+import com.example.servertodolist.repository.TaskRepository
+import org.springframework.web.bind.annotation.*
+
+@RestController
+@RequestMapping("/api/tasks")
+@CrossOrigin(origins = ["http://localhost:4200"])
+class TaskController(private val repository: TaskRepository) {
+
+    @GetMapping
+    fun getAllTasks(): List<Task> = repository.findAll()
+
+    @PostMapping
+    fun createTask(@RequestBody task: Task): Task = repository.save(task)
+
+    @DeleteMapping("/{id}")
+    fun deleteTask(@PathVariable id: Long) = repository.deleteById(id)
+}

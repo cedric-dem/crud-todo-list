@@ -8,7 +8,7 @@ import { Note } from '../models/note.model';
 })
 export class NoteService {
   private http = inject(HttpClient);
-  private baseUrl = 'http://localhost:8080/api/notes';
+  private baseUrl = 'http://localhost:8080/api/tasks';
 
   getNotes(): Observable<Note[]> {
     return this.http.get<Note[]>(this.baseUrl);
