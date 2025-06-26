@@ -20,7 +20,7 @@
 <h2>List of Tasks</h2>
 <ul>
   <li *ngFor="let n of tasks">
-    <strong>{{ n.title }}</strong> — {{ n.content }} — {{ n.completed }} — {{ n.importance }}
+    <strong>{{ n.title }}</strong> — {{ n.content }} — {{ n.completed }} — {{ n.importance }} — {{ n.dateCreation }}
     <button
       [ngClass]="n.completed ? 'btn-grey' : 'btn-blue'"
       (click)="n.completed ? removeTaskFromCompleted(n) : setTaskCompleted(n)">

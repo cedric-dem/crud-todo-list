@@ -3,4 +3,5 @@ export interface Task {
   content: string;
   completed: boolean;
   importance: string;
+  dateCreation: string;
 }
