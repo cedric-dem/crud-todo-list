@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Task } from './models/task.model';
 import { RouterOutlet } from '@angular/router';
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow, isPast } from 'date-fns';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +20,7 @@ export class App implements OnInit {
   private taskService = inject(TaskService);
   private testService = inject(TestService);
 
-  task: Task = { title: '', content: '', completed:false, importance:"", dateCreation: "" };
+  task: Task = { title: '', content: '', completed:false, importance:"", dateCreation: "", dueDate: "" };
   createdTask: Task | null = null;
 
   tasks: Task[] = [];
@@ -47,7 +47,7 @@ export class App implements OnInit {
     this.taskService.createTask(this.task).subscribe({
       next: res => {
         this.createdTask = res;
-        this.task = { title: '', content: '' , completed: false, importance:"", dateCreation: ""  };
+        this.task = { title: '', content: '' , completed: false, importance:"", dateCreation: "", dueDate: ""  };
         this.loadTasks();
       },
       error: err => console.error('Error Creating task', err)
@@ -68,6 +68,16 @@ export class App implements OnInit {
   getRelativeDate(dateString: string): string {
     return formatDistanceToNow(new Date(dateString), { addSuffix: true});
   }
+
+  getRelativeDueDate(dateString: string): string {
+    const due = new Date(dateString);
+    if (isPast(due)) {
+      return `Due ${formatDistanceToNow(due, { addSuffix: true })}`; // "due 3 days ago"
+    } else {
+      return `Due in ${formatDistanceToNow(due)}`; // "due in 5 days"
+    }
+  }
+
 
   removeTaskFromCompleted(task: any) {
     this.taskService.removeTaskFromCompleted(task.id).subscribe({

@@ -4,4 +4,5 @@ export interface Task {
   completed: boolean;
   importance: string;
   dateCreation: string;
+  dueDate: string;
 }

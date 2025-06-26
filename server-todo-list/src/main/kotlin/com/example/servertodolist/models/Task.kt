@@ -26,5 +26,7 @@ data class Task(
     @Enumerated(EnumType.STRING)
     var importance: TaskImportance = TaskImportance.Low,
 
-    val dateCreation: LocalDateTime = LocalDateTime.now()
+    val dateCreation: LocalDateTime = LocalDateTime.now(),
+
+    var dueDate: LocalDateTime? = null
 )
