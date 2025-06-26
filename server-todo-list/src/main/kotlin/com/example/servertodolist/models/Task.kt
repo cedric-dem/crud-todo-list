@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import java.time.LocalDateTime
 
 @Entity
 @Table(name = "database_task")
@@ -23,5 +24,7 @@ data class Task(
     var completed: Boolean = false,
 
     @Enumerated(EnumType.STRING)
-    var importance: TaskImportance = TaskImportance.Low
+    var importance: TaskImportance = TaskImportance.Low,
+
+    val dateCreation: LocalDateTime = LocalDateTime.now()
 )
