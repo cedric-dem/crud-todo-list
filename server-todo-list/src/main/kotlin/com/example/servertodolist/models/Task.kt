@@ -1,5 +1,6 @@
 package com.example.servertodolist.models
 
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
@@ -7,6 +8,7 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import org.hibernate.annotations.CreationTimestamp
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -27,7 +29,9 @@ data class Task(
     @Enumerated(EnumType.STRING)
     var importance: TaskImportance = TaskImportance.Low,
 
-    val dateCreation: LocalDateTime = LocalDateTime.now(),
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
+    var dateCreation: LocalDateTime? = null,
 
     var dueDate: LocalDate,
 )

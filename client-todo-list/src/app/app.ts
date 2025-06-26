@@ -47,7 +47,7 @@ export class App implements OnInit {
   }
 
   submit() {
-  console.log(this.task.dueDate)
+  console.log("this is a test"+this.task.dueDate+"and oother",this.task.dateCreation)
 
 
     this.taskService.createTask(this.task).subscribe({
