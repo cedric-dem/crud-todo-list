@@ -20,7 +20,7 @@ export class App implements OnInit {
   private taskService = inject(TaskService);
   private testService = inject(TestService);
 
-  task: Task = { title: '', content: '', completed:false, importance:"", dateCreation: "", dueDate: "" };
+  task: Task = { title: '', content: '', completed:false, importance:"", dateCreation: null, dueDate: null };
   createdTask: Task | null = null;
 
   tasks: Task[] = [];
@@ -47,7 +47,7 @@ export class App implements OnInit {
     this.taskService.createTask(this.task).subscribe({
       next: res => {
         this.createdTask = res;
-        this.task = { title: '', content: '' , completed: false, importance:"", dateCreation: "", dueDate: ""  };
+        this.task = { title: '', content: '' , completed: false, importance:"", dateCreation: null, dueDate:null  };
         this.loadTasks();
       },
       error: err => console.error('Error Creating task', err)
