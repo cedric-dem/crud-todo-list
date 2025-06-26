@@ -52,4 +52,26 @@ export class App implements OnInit {
       error: err => console.error('Error Creating task', err)
     });
   }
+
+
+  setTaskCompleted(task: any) {
+    this.taskService.setTaskCompleted(task.id).subscribe({
+      next: () => {
+        task.completed = true;
+        this.loadTasks();
+      },
+      error: err => console.error('Error setting task as completed', err)
+    });
+  }
+
+  removeTaskFromCompleted(task: any) {
+    this.taskService.removeTaskFromCompleted(task.id).subscribe({
+      next: () => {
+        task.completed = false;
+        this.loadTasks();
+      },
+      error: err => console.error('Error removing task from completed', err)
+    });
+  }
+
 }

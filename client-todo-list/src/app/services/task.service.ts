@@ -17,4 +17,14 @@ export class TaskService {
   createTask(task: Task): Observable<Task> {
     return this.http.post<Task>(this.baseUrl, task);
   }
+
+  setTaskCompleted(id: number) {
+    return this.http.put(`${this.baseUrl}/${id}/complete`, {});
+  }
+
+  removeTaskFromCompleted(id: number) {
+    return this.http.put(`${this.baseUrl}/${id}/uncomplete`, {});
+  }
+
+
 }

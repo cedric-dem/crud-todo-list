@@ -20,15 +20,16 @@ class TaskController(private val repository: TaskRepository) {
 
     @PutMapping("/{id}/complete")
     fun completeTask(@PathVariable id: Long): ResponseEntity<Task> {
-        val taskOptional = repository.findById(id)
-        return if (taskOptional.isPresent) {
-            val task = taskOptional.get()
-            task.completed = true
-            val updatedTask = repository.save(task)
-            ResponseEntity.ok(updatedTask)
-        } else {
-            ResponseEntity.notFound().build()
-        }
+        val task = repository.findById(id).orElse(null) ?: return ResponseEntity.notFound().build()
+        task.completed = true
+        return ResponseEntity.ok(repository.save(task))
+    }
+
+    @PutMapping("/{id}/uncomplete")
+    fun uncompleteTask(@PathVariable id: Long): ResponseEntity<Task> {
+        val task = repository.findById(id).orElse(null) ?: return ResponseEntity.notFound().build()
+        task.completed = false
+        return ResponseEntity.ok(repository.save(task))
     }
 
 }
