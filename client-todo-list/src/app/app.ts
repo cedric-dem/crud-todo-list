@@ -72,9 +72,9 @@ export class App implements OnInit {
   getRelativeDueDate(dateString: string): string {
     const due = new Date(dateString);
     if (isPast(due)) {
-      return `Due ${formatDistanceToNow(due, { addSuffix: true })}`; // "due 3 days ago"
+      return `Due ${formatDistanceToNow(due, { addSuffix: true })}`;
     } else {
-      return `Due in ${formatDistanceToNow(due)}`; // "due in 5 days"
+      return `Due in ${formatDistanceToNow(due)}`;
     }
   }
 
