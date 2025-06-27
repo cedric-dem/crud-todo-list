@@ -20,6 +20,9 @@ export class App implements OnInit {
   private taskService = inject(TaskService);
   private testService = inject(TestService);
 
+  editedTask: Task | null = null;
+  showEditPopup = false;
+
   task: Task = {
     id: 0,
     title: '',
@@ -52,7 +55,6 @@ export class App implements OnInit {
   }
 
   createTask(taskData: any) {
-
     this.taskService.createTask(this.task).subscribe({
       next: (res) => {
         this.createdTask = res;
@@ -104,8 +106,19 @@ export class App implements OnInit {
     });
   }
 
-  openEditPopup(n: Task){
-    console.log('edit task',n);
-    //TODO
+  openEditPopup(task: Task) {
+    console.log('edit task', task);
+    this.editedTask = { ...task };
+    this.showEditPopup = true;
+  }
+
+  closeEditPopup() {
+    this.showEditPopup = false;
+    this.editedTask = null;
+  }
+
+  updateTask(updatedTask: Task) {
+    console.log('update task', updatedTask);
+    this.closeEditPopup();
   }
 }

@@ -25,7 +25,13 @@ export class TaskForm {
     dueDate: '',
   };
 
+  @Output() cancel = new EventEmitter<void>();
+
   submit() {
     this.formSubmit.emit(this.task);
+  }
+
+  onCancel() {
+    this.cancel.emit();
   }
 }

@@ -31,4 +31,19 @@
   </li>
 </ul>
 
+
+<div *ngIf="showEditPopup" class="popup-overlay">
+  <div class="popup-content">
+    <h3>Edit Task</h3>
+    <app-task-form
+      *ngIf="editedTask"
+      [task]="editedTask"
+      [buttonText]="'Save'"
+      (formSubmit)="updateTask($event)"
+      (cancel)="closeEditPopup()"
+    ></app-task-form>
+    <button (click)="closeEditPopup()">Cancel</button>
+  </div>
+</div>
+
 <router-outlet />
