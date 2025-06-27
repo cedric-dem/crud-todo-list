@@ -1,27 +1,10 @@
 <h2>Create a Task</h2>
 <div class="form-panel">
-  <form (ngSubmit)="submit()">
-    <input [(ngModel)]="task.title" name="title" placeholder="Title" required />
-
-    <textarea [(ngModel)]="task.content" name="content" placeholder="Content" required></textarea>
-
-    <select [(ngModel)]="task.importance" name="importance" required>
-      <option value="" disabled selected>Select Importance</option>
-      <option value="Low">Low</option>
-      <option value="Medium">Medium</option>
-      <option value="High">High</option>
-    </select>
-
-    <label for="dueDate">Due Date:</label>
-    <input
-      type="date"
-      [(ngModel)]="task.dueDate"
-      name="dueDate"
-      required
-    />
-    <button type="submit">Create</button>
-
-  </form>
+  <app-task-form
+    [task]="task"
+    buttonText="Create"
+    (formSubmit)="createTask($event)">
+  </app-task-form>
 </div>
 
 <h2>List of Tasks</h2>

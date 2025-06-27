@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, NgModule } from '@angular/core';
 import { TaskService } from './services/task.service';
 import { TestService } from './services/test';
 import { CommonModule } from '@angular/common';
@@ -6,11 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { Task } from './models/task.model';
 import { RouterOutlet } from '@angular/router';
 import { formatDistanceToNow } from 'date-fns';
+import { TaskForm } from './task-form/task-form';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterOutlet],
+  imports: [CommonModule, FormsModule, RouterOutlet, TaskForm],
   styleUrls: ['./app.css'],
   templateUrl: './app.html',
 })
@@ -47,6 +49,11 @@ export class App implements OnInit {
       next: (tasks) => (this.tasks = tasks),
       error: (err) => console.error('Error loading tasks', err),
     });
+  }
+
+  createTask(taskData: any) {
+    console.log('Create task:', taskData);
+    // TODO
   }
 
   submit() {
