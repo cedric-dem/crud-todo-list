@@ -100,3 +100,22 @@ li {
   justify-content: space-between;
   align-items: center;
 }
+
+.btn-delete {
+  background: transparent;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px;
+  margin-left: 8px;
+  transition: color 0.2s ease;
+}
+
+.btn-delete:hover {
+  color: #c0392b;
+}
+
+.btn-delete:focus {
+  outline: none;
+}

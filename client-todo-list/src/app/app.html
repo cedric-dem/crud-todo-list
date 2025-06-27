@@ -31,7 +31,7 @@
       <button
         [ngClass]="n.completed ? 'btn-grey' : 'btn-blue'"
         (click)="n.completed ? removeTaskFromCompleted(n) : setTaskCompleted(n)">
-        {{ n.completed ? 'Set Not completed' : 'Set Completed' }}
+        {{ n.completed ? '❌' : '✅' }}
       </button>
       <span>
         <strong>{{ n.title }} : </strong> {{ n.content }} <br>
@@ -40,7 +40,7 @@
         <strong> Due in : </strong> {{ getRelativeDueDate(n.dueDate) }}
       </span>
     </div>
-    <button class="btn-red" (click)="deleteTask(n)">Delete Task</button>
+    <button class="btn-delete" (click)="deleteTask(n)"> 🗑️</button>
   </li>
 </ul>
 
