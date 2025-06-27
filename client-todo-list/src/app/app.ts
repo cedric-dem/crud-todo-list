@@ -53,10 +53,7 @@ export class App implements OnInit {
 
   createTask(taskData: any) {
     console.log('Create task:', taskData);
-    // TODO
-  }
 
-  submit() {
     this.taskService.createTask(this.task).subscribe({
       next: (res) => {
         this.createdTask = res;
