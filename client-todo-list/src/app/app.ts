@@ -95,4 +95,13 @@ export class App implements OnInit {
     });
   }
 
+  deleteTask(task: any) {
+    this.taskService.deleteTask(task.id).subscribe({
+      next: () => {
+        this.loadTasks();
+      },
+      error: err => console.error('Error deleting task', err)
+    });
+  }
+
 }

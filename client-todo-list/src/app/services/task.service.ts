@@ -26,5 +26,9 @@ export class TaskService {
     return this.http.put(`${this.baseUrl}/${id}/uncomplete`, {});
   }
 
+  deleteTask(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+
 
 }
