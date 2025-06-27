@@ -31,5 +31,4 @@ class TaskController(private val repository: TaskRepository) {
         task.completed = false
         return ResponseEntity.ok(repository.save(task))
     }
-
 }

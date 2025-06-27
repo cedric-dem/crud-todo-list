@@ -9,7 +9,6 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import org.hibernate.annotations.CreationTimestamp
-import org.springframework.boot.autoconfigure.SpringBootApplication
 import java.time.LocalDate
 import java.time.LocalDateTime
 

@@ -9,5 +9,4 @@ class ServerTodoListApplicationTests {
     @Test
     fun contextLoads() {
     }
-
 }
