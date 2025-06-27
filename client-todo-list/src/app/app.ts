@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Task } from './models/task.model';
 import { RouterOutlet } from '@angular/router';
-import { formatDistanceToNow, isPast } from 'date-fns';
+import { formatDistanceToNow } from 'date-fns';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +19,7 @@ export class App implements OnInit {
   private testService = inject(TestService);
 
   task: Task = {
+    id: 0,
     title: '',
     content: '',
     completed: false,
@@ -53,6 +54,7 @@ export class App implements OnInit {
       next: (res) => {
         this.createdTask = res;
         this.task = {
+          id: 0,
           title: '',
           content: '',
           completed: false,
@@ -66,7 +68,7 @@ export class App implements OnInit {
     });
   }
 
-  setTaskCompleted(task: any) {
+  setTaskCompleted(task: Task) {
     this.taskService.setTaskCompleted(task.id).subscribe({
       next: () => {
         task.completed = true;
@@ -80,7 +82,7 @@ export class App implements OnInit {
     return formatDistanceToNow(new Date(dateString), { addSuffix: true });
   }
 
-  removeTaskFromCompleted(task: any) {
+  removeTaskFromCompleted(task: Task) {
     this.taskService.removeTaskFromCompleted(task.id).subscribe({
       next: () => {
         task.completed = false;
@@ -90,7 +92,7 @@ export class App implements OnInit {
     });
   }
 
-  deleteTask(task: any) {
+  deleteTask(task: Task) {
     this.taskService.deleteTask(task.id).subscribe({
       next: () => {
         this.loadTasks();
