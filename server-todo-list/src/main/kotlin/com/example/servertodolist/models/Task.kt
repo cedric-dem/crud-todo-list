@@ -14,7 +14,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "database_task")
+@Table(name = "table_task")
 data class Task(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
