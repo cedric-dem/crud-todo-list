@@ -16,10 +16,6 @@ import { formatDistanceToNow, isPast } from 'date-fns';
 })
 export class App implements OnInit {
 
-  logDueDate() {
-    console.log('Current dueDate:', this.task.dueDate);
-  }
-
   private taskService = inject(TaskService);
   private testService = inject(TestService);
 
@@ -47,9 +43,6 @@ export class App implements OnInit {
   }
 
   submit() {
-  console.log("this is a test"+this.task.dueDate+"and oother",this.task.dateCreation)
-
-
     this.taskService.createTask(this.task).subscribe({
       next: res => {
         this.createdTask = res;
