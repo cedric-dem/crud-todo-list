@@ -75,14 +75,6 @@ export class App implements OnInit {
     return formatDistanceToNow(new Date(dateString), { addSuffix: true});
   }
 
-  getRelativeDueDate(dateString: string): string {
-    const due = new Date(dateString);
-    if (isPast(due)) {
-      return `Due ${formatDistanceToNow(due, { addSuffix: true })}`;
-    } else {
-      return `Due in ${formatDistanceToNow(due)}`;
-    }
-  }
 
 
   removeTaskFromCompleted(task: any) {

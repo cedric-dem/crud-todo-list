@@ -36,8 +36,8 @@
       <span>
         <strong>{{ n.title }} : </strong> {{ n.content }} <br>
         <strong> Importance : </strong> {{ n.importance }} <br>
-        <strong> Created : </strong> {{ getRelativeDate(n.dateCreation ?? '') }}<br>
-        <strong> Due in : </strong> {{ getRelativeDueDate(n.dueDate) }}
+        <strong> Created </strong> {{ getRelativeDate(n.dateCreation ?? '') }}<br>
+        <strong> Due  </strong> {{ getRelativeDate(n.dueDate) }}
       </span>
     </div>
     <button class="btn-delete" (click)="deleteTask(n)"> 🗑️</button>
