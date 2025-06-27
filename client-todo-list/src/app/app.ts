@@ -52,7 +52,6 @@ export class App implements OnInit {
   }
 
   createTask(taskData: any) {
-    console.log('Create task:', taskData);
 
     this.taskService.createTask(this.task).subscribe({
       next: (res) => {
@@ -103,5 +102,10 @@ export class App implements OnInit {
       },
       error: (err) => console.error('Error deleting task', err),
     });
+  }
+
+  openEditPopup(n: Task){
+    console.log('edit task',n);
+    //TODO
   }
 }
