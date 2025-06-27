@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Task } from '../models/task.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TaskService {
   private http = inject(HttpClient);
@@ -29,6 +29,4 @@ export class TaskService {
   deleteTask(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
-
-
 }

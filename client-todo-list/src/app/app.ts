@@ -12,14 +12,20 @@ import { formatDistanceToNow, isPast } from 'date-fns';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterOutlet],
   styleUrls: ['./app.css'],
-  templateUrl: './app.html'
+  templateUrl: './app.html',
 })
 export class App implements OnInit {
-
   private taskService = inject(TaskService);
   private testService = inject(TestService);
 
-  task: Task = { title: '', content: '', completed:false, importance:"", dateCreation: null, dueDate:"" };
+  task: Task = {
+    title: '',
+    content: '',
+    completed: false,
+    importance: '',
+    dateCreation: null,
+    dueDate: '',
+  };
   createdTask: Task | null = null;
 
   tasks: Task[] = [];
@@ -28,8 +34,8 @@ export class App implements OnInit {
 
   ngOnInit() {
     this.testService.getTest().subscribe({
-      next: res => this.response = res,
-      error: err => this.response = 'Error : ' + err.message
+      next: (res) => (this.response = res),
+      error: (err) => (this.response = 'Error : ' + err.message),
     });
 
     this.loadTasks();
@@ -37,22 +43,28 @@ export class App implements OnInit {
 
   loadTasks() {
     this.taskService.getTasks().subscribe({
-      next: tasks => this.tasks = tasks,
-      error: err => console.error('Error loading tasks', err)
+      next: (tasks) => (this.tasks = tasks),
+      error: (err) => console.error('Error loading tasks', err),
     });
   }
 
   submit() {
     this.taskService.createTask(this.task).subscribe({
-      next: res => {
+      next: (res) => {
         this.createdTask = res;
-        this.task = { title: '', content: '' , completed: false, importance:"", dateCreation: null, dueDate: ""  };
+        this.task = {
+          title: '',
+          content: '',
+          completed: false,
+          importance: '',
+          dateCreation: null,
+          dueDate: '',
+        };
         this.loadTasks();
       },
-      error: err => console.error('Error Creating task', err)
+      error: (err) => console.error('Error Creating task', err),
     });
   }
-
 
   setTaskCompleted(task: any) {
     this.taskService.setTaskCompleted(task.id).subscribe({
@@ -60,15 +72,13 @@ export class App implements OnInit {
         task.completed = true;
         this.loadTasks();
       },
-      error: err => console.error('Error setting task as completed', err)
+      error: (err) => console.error('Error setting task as completed', err),
     });
   }
 
   getRelativeDate(dateString: string): string {
-    return formatDistanceToNow(new Date(dateString), { addSuffix: true});
+    return formatDistanceToNow(new Date(dateString), { addSuffix: true });
   }
-
-
 
   removeTaskFromCompleted(task: any) {
     this.taskService.removeTaskFromCompleted(task.id).subscribe({
@@ -76,7 +86,7 @@ export class App implements OnInit {
         task.completed = false;
         this.loadTasks();
       },
-      error: err => console.error('Error removing task from completed', err)
+      error: (err) => console.error('Error removing task from completed', err),
     });
   }
 
@@ -85,8 +95,7 @@ export class App implements OnInit {
       next: () => {
         this.loadTasks();
       },
-      error: err => console.error('Error deleting task', err)
+      error: (err) => console.error('Error deleting task', err),
     });
   }
-
 }
