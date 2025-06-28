@@ -107,7 +107,6 @@ export class App implements OnInit {
   }
 
   openEditPopup(task: Task) {
-    console.log('edit task', task);
     this.editedTask = { ...task };
     this.showEditPopup = true;
   }
@@ -118,7 +117,6 @@ export class App implements OnInit {
   }
 
   updateTask(updatedTask: Task) {
-    console.log('update task', updatedTask);
     this.taskService.updateTask(updatedTask).subscribe({
       next: () => {
         this.loadTasks();
