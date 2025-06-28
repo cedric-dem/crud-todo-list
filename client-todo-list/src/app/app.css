@@ -140,3 +140,26 @@ li {
   border-radius: 8px;
   min-width: 300px;
 }
+
+.btn-cancel {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 15px;
+  color: #666;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-cancel:hover {
+  background-color: #ffeaea;
+  color: #c0392b;
+  border-color: #e0b4b4;
+}
+
+.btn-cancel:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(192, 57, 43, 0.2);
+}
