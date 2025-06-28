@@ -119,6 +119,13 @@ export class App implements OnInit {
 
   updateTask(updatedTask: Task) {
     console.log('update task', updatedTask);
+    this.taskService.updateTask(updatedTask).subscribe({
+      next: () => {
+        this.loadTasks();
+        this.closeEditPopup();
+      },
+      error: (err) => console.error('Error updating task', err),
+    });
     this.closeEditPopup();
   }
 }

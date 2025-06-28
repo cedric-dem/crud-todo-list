@@ -39,4 +39,17 @@ class TaskController(private val repository: TaskRepository) {
         task.completed = false
         return ResponseEntity.ok(repository.save(task))
     }
+
+    @PutMapping("/{id}")
+    fun updateTask(@PathVariable id: Long, @RequestBody updated: Task): ResponseEntity<Task> {
+        val existing = repository.findById(id).orElse(null) ?: return ResponseEntity.notFound().build()
+
+        existing.title = updated.title
+        existing.content = updated.content
+        existing.importance = updated.importance
+        existing.dueDate = updated.dueDate
+        existing.completed = updated.completed
+
+        return ResponseEntity.ok(repository.save(existing))
+    }
 }
