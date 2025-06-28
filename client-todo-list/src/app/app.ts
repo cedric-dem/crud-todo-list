@@ -32,6 +32,10 @@ export class App implements OnInit {
     dateCreation: null,
     dueDate: '',
   };
+
+  sortBy: 'dueDate' | 'dateCreation' = 'dueDate';
+  sortOrder: 'asc' | 'desc' = 'asc';
+
   createdTask: Task | null = null;
 
   tasks: Task[] = [];
@@ -52,6 +56,7 @@ export class App implements OnInit {
       next: (tasks) => (this.tasks = tasks),
       error: (err) => console.error('Error loading tasks', err),
     });
+    this.sortTasks();
   }
 
   createTask(taskData: any) {
@@ -125,5 +130,18 @@ export class App implements OnInit {
       error: (err) => console.error('Error updating task', err),
     });
     this.closeEditPopup();
+  }
+
+  sortTasks(): void {
+    this.tasks.sort((a, b) => {
+      const dateA = new Date(a[this.sortBy] || '');
+      const dateB = new Date(b[this.sortBy] || '');
+
+      if (this.sortOrder === 'asc') {
+        return dateA.getTime() - dateB.getTime();
+      } else {
+        return dateB.getTime() - dateA.getTime();
+      }
+    });
   }
 }
