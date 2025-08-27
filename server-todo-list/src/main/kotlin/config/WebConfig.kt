@@ -1,4 +1,3 @@
-
 package com.example.servertodolist.config
 
 import org.springframework.context.annotation.Bean

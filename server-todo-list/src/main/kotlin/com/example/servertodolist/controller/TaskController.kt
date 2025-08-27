@@ -1,4 +1,5 @@
 package com.example.servertodolist.controller
+
 import com.example.servertodolist.models.Task
 import com.example.servertodolist.repository.TaskRepository
 import org.springframework.http.ResponseEntity
@@ -33,8 +34,8 @@ class TaskController(private val repository: TaskRepository) {
         return ResponseEntity.ok(repository.save(task))
     }
 
-    @PutMapping("/{id}/uncomplete")
-    fun uncompleteTask(@PathVariable id: Long): ResponseEntity<Task> {
+    @PutMapping("/{id}/remove-task-completion")
+    fun removeTaskCompletion(@PathVariable id: Long): ResponseEntity<Task> {
         val task = repository.findById(id).orElse(null) ?: return ResponseEntity.notFound().build()
         task.completed = false
         return ResponseEntity.ok(repository.save(task))

@@ -23,7 +23,7 @@ export class TaskService {
   }
 
   removeTaskFromCompleted(id: number) {
-    return this.http.put(`${this.baseUrl}/${id}/uncomplete`, {});
+    return this.http.put(`${this.baseUrl}/${id}/remove-task-completion`, {});
   }
 
   deleteTask(id: number) {
