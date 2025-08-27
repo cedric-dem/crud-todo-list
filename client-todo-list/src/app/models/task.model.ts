@@ -3,7 +3,7 @@ export interface Task {
   title: string;
   content: string;
   completed: boolean;
-  importance: string;
+  importance: Importance;
   dateCreation?: string | null;
   dueDate: string;
 }

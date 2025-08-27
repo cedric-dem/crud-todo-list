@@ -1,13 +1,13 @@
-import { Component, OnInit, inject, NgModule } from '@angular/core';
-import { TaskService } from './services/task.service';
-import { TestService } from './services/test';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Task } from './models/task.model';
-import { RouterOutlet } from '@angular/router';
-import { formatDistanceToNow } from 'date-fns';
-import { TaskForm } from './task-form/task-form';
-import { BrowserModule } from '@angular/platform-browser';
+import {Component, OnInit, inject, NgModule} from '@angular/core';
+import {TaskService} from './services/task.service';
+import {TestService} from './services/test';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {Task} from './models/task.model';
+import {RouterOutlet} from '@angular/router';
+import {formatDistanceToNow} from 'date-fns';
+import {TaskForm} from './task-form/task-form';
+import {BrowserModule} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +20,13 @@ export class App implements OnInit {
   private taskService = inject(TaskService);
   private testService = inject(TestService);
 
+
+  private importanceOrder: Record<Importance, number> = {
+    Low: 1,
+    Medium: 2,
+    High: 3
+  };
+
   editedTask: Task | null = null;
   showEditPopup = false;
 
@@ -28,12 +35,12 @@ export class App implements OnInit {
     title: '',
     content: '',
     completed: false,
-    importance: '',
+    importance: "Low",
     dateCreation: null,
     dueDate: '',
   };
 
-  sortBy: 'dueDate' | 'dateCreation' = 'dueDate';
+  sortBy: 'dueDate' | 'dateCreation' | 'importance' | 'title' = 'dueDate';
   sortOrder: 'asc' | 'desc' = 'asc';
 
   createdTask: Task | null = null;
@@ -68,7 +75,7 @@ export class App implements OnInit {
           title: '',
           content: '',
           completed: false,
-          importance: '',
+          importance: 'Low',
           dateCreation: null,
           dueDate: '',
         };
@@ -89,7 +96,7 @@ export class App implements OnInit {
   }
 
   getRelativeDate(dateString: string): string {
-    return formatDistanceToNow(new Date(dateString), { addSuffix: true });
+    return formatDistanceToNow(new Date(dateString), {addSuffix: true});
   }
 
   removeTaskFromCompleted(task: Task) {
@@ -112,7 +119,7 @@ export class App implements OnInit {
   }
 
   openEditPopup(task: Task) {
-    this.editedTask = { ...task };
+    this.editedTask = {...task};
     this.showEditPopup = true;
   }
 
@@ -133,15 +140,42 @@ export class App implements OnInit {
   }
 
   sortTasks(): void {
-    this.tasks.sort((a, b) => {
-      const dateA = new Date(a[this.sortBy] || '');
-      const dateB = new Date(b[this.sortBy] || '');
+    if (this.sortBy === 'dueDate' || this.sortBy === 'dateCreation') { //if sort by date
+      this.tasks.sort((a, b) => {
+        const dateA = new Date(a[this.sortBy] || '');
+        const dateB = new Date(b[this.sortBy] || '');
 
-      if (this.sortOrder === 'asc') {
-        return dateA.getTime() - dateB.getTime();
-      } else {
-        return dateB.getTime() - dateA.getTime();
-      }
-    });
+        if (this.sortOrder === 'asc') {
+          return dateA.getTime() - dateB.getTime();
+        } else {
+          return dateB.getTime() - dateA.getTime();
+        }
+      });
+    } else if (this.sortBy === 'importance') {
+      this.tasks.sort((a, b) => {
+
+        const a_importance_index = this.importanceOrder[a.importance];
+        const b_importance_index = this.importanceOrder[b.importance];
+
+        if (this.sortOrder === 'asc') {
+          return a_importance_index - b_importance_index;
+        } else {
+          return b_importance_index - a_importance_index;
+        }
+
+      });
+    } else if (this.sortBy === 'title') {
+      this.tasks.sort((a, b) => {
+
+        const a_title: string = a.title || '';
+        const b_title: string = b.title || '';
+
+        if (this.sortOrder === 'asc') {
+          return a_title.localeCompare(b_title);
+        } else {
+          return b_title.localeCompare(a_title);
+        }
+      });
+    }
   }
 }

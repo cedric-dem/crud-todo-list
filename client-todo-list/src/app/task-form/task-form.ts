@@ -20,7 +20,7 @@ export class TaskForm {
     title: '',
     content: '',
     completed: false,
-    importance: '',
+    importance: 'Low',
     dateCreation: null,
     dueDate: '',
   };
