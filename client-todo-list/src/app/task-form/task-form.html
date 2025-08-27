@@ -1,5 +1,5 @@
 <form (ngSubmit)="submit()">
-  <input [(ngModel)]="task.title" name="title" placeholder="Title" required />
+  <input [(ngModel)]="task.title" name="title" placeholder="Title" required/>
   <textarea [(ngModel)]="task.content" name="content" placeholder="Content" required></textarea>
 
   <select [(ngModel)]="task.importance" name="importance" required>
@@ -10,7 +10,7 @@
   </select>
 
   <label for="dueDate">Due Date:</label>
-  <input type="date" [(ngModel)]="task.dueDate" name="dueDate" required />
+  <input type="date" [(ngModel)]="task.dueDate" name="dueDate" required/>
 
   <button type="submit">{{ buttonText }}</button>
 </form>
